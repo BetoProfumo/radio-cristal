@@ -1,0 +1,366 @@
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+
+export type Lang = "es" | "en" | "pt";
+
+export const LANGS: { code: Lang; label: string; flag: string }[] = [
+  { code: "es", label: "Español", flag: "🇦🇷" },
+  { code: "en", label: "English", flag: "🇺🇸" },
+  { code: "pt", label: "Português", flag: "🇧🇷" },
+];
+
+type Dict = Record<string, string>;
+
+const DICTS: Record<Lang, Dict> = {
+  es: {
+    "nav.home": "Inicio",
+    "nav.news": "Noticias",
+    "nav.programming": "Programación",
+    "nav.about": "Nosotros",
+    "nav.contact": "Contacto",
+    "cta.listenLive": "Escuchar en Vivo",
+    "cta.live": "En vivo",
+    "cta.pause": "Pausar transmisión",
+    "infobar.location": "Puerto Madryn, Chubut",
+    "infobar.loading": "Cargando clima…",
+    "infobar.feels": "ST",
+    "weather.clear": "Despejado",
+    "weather.partly": "Parcialmente nublado",
+    "weather.cloudy": "Nublado",
+    "weather.fog": "Neblina",
+    "weather.drizzle": "Llovizna",
+    "weather.rain": "Lluvia",
+    "weather.snow": "Nieve",
+    "weather.storm": "Tormenta",
+    "hero.badge": "EN VIVO · FM 95.7 Puerto Madryn",
+    "hero.subtitle": "La voz que acompaña a Puerto Madryn las 24 horas. Información, música y comunidad.",
+    "hero.latestNews": "Últimas Noticias",
+    "hero.listeners": "Oyentes",
+    "hero.programs": "Programas",
+    "hero.years": "Años",
+    "hero.nowPlaying": "AHORA SUENA",
+    "hero.currentProgram": "Programa actual",
+    "hero.seeSchedule": "Ver programación completa",
+    "hero.withHost": "con",
+    "featured.readMore": "Leer más",
+    "news.eyebrow": "Actualidad",
+    "news.title": "Últimas Noticias",
+    "news.subtitle": "Lo más importante de Puerto Madryn, la Patagonia y el país, las 24 horas.",
+    "news.search": "Buscar noticias…",
+    "news.empty": "No se encontraron noticias.",
+    "news.error": "No pudimos cargar las noticias en este momento. Intentá nuevamente en unos minutos.",
+    "news.readMore": "Leer más",
+    "cat.all": "Todas",
+    "cat.politics": "Política",
+    "cat.sports": "Deportes",
+    "cat.tourism": "Turismo",
+    "cat.culture": "Cultura",
+    "cat.police": "Policiales",
+    "cat.regional": "Regionales",
+    "cat.national": "Nacionales",
+    "cat.international": "Internacionales",
+    "prog.eyebrow": "Agenda",
+    "prog.title": "Programación",
+    "prog.subtitle": "Nuestra grilla diaria, pensada para acompañarte de la mañana a la noche.",
+    "prog.days": "Lunes a Viernes",
+    "about.eyebrow": "Sobre Nosotros",
+    "about.title": "Sobre Radio Cristal",
+    "about.body": "Radio Cristal es un medio de comunicación comprometido con la información, el entretenimiento y el acompañamiento diario de la comunidad. Nuestra misión es conectar a las personas a través de contenidos de calidad, noticias relevantes y una programación pensada para informar, entretener y generar cercanía con nuestros oyentes.",
+    "about.years": "años en el aire",
+    "about.v1.t": "Voz local",
+    "about.v1.d": "Información cercana, contada por periodistas de la región.",
+    "about.v2.t": "Comunidad",
+    "about.v2.d": "Acompañamos a Puerto Madryn las 24 horas.",
+    "about.v3.t": "Credibilidad",
+    "about.v3.d": "Más de 15 años informando con rigor y respeto.",
+    "about.v4.t": "Pasión",
+    "about.v4.d": "Programación cuidada con la mejor música y entrevistas.",
+    "social.eyebrow": "Seguinos",
+    "social.title": "Conectate con Radio Cristal",
+    "contact.eyebrow": "Contacto",
+    "contact.title": "Escribinos",
+    "contact.subtitle": "¿Querés enviarnos información, sumarte a la radio o contratar una pauta? Estamos para vos.",
+    "contact.studios": "Estudios",
+    "contact.email": "Email",
+    "contact.phone": "Teléfono",
+    "contact.name": "Nombre",
+    "contact.phoneOpt": "(opcional)",
+    "contact.message": "Mensaje",
+    "contact.send": "Enviar mensaje",
+    "contact.success": "¡Mensaje enviado! Te responderemos a la brevedad.",
+    "contact.err.name": "Nombre muy corto",
+    "contact.err.email": "Email inválido",
+    "contact.err.message": "Contanos un poco más",
+    "footer.tag": "La voz que acompaña a Puerto Madryn las 24 horas. Información, música y comunidad.",
+    "footer.nav": "Navegación",
+    "footer.contact": "Contacto",
+    "footer.join": "Sumate",
+    "footer.joinDesc": "Recibí las noticias más importantes en tu email.",
+    "footer.rights": "Todos los derechos reservados.",
+    "footer.privacy": "Política de privacidad",
+    "footer.terms": "Términos",
+    "footer.langLabel": "Idioma",
+    "player.live": "En vivo",
+    "player.play": "Reproducir",
+    "player.pause": "Pausar",
+    "player.volume": "Volumen",
+    "player.connecting": "Conectando",
+    "player.connected": "Conectado",
+    "player.idle": "En espera",
+    "player.nosignal": "Sin señal",
+    "lang.switch": "Idioma",
+  },
+  en: {
+    "nav.home": "Home",
+    "nav.news": "News",
+    "nav.programming": "Schedule",
+    "nav.about": "About",
+    "nav.contact": "Contact",
+    "cta.listenLive": "Listen Live",
+    "cta.live": "Live",
+    "cta.pause": "Pause stream",
+    "infobar.location": "Puerto Madryn, Chubut",
+    "infobar.loading": "Loading weather…",
+    "infobar.feels": "Feels",
+    "weather.clear": "Clear",
+    "weather.partly": "Partly cloudy",
+    "weather.cloudy": "Cloudy",
+    "weather.fog": "Fog",
+    "weather.drizzle": "Drizzle",
+    "weather.rain": "Rain",
+    "weather.snow": "Snow",
+    "weather.storm": "Storm",
+    "hero.badge": "LIVE · FM 95.7 Puerto Madryn",
+    "hero.subtitle": "The voice that keeps Puerto Madryn company 24 hours a day. News, music and community.",
+    "hero.latestNews": "Latest News",
+    "hero.listeners": "Listeners",
+    "hero.programs": "Programs",
+    "hero.years": "Years",
+    "hero.nowPlaying": "NOW PLAYING",
+    "hero.currentProgram": "Current program",
+    "hero.seeSchedule": "See full schedule",
+    "hero.withHost": "with",
+    "featured.readMore": "Read more",
+    "news.eyebrow": "What's New",
+    "news.title": "Latest News",
+    "news.subtitle": "The most important news from Puerto Madryn, Patagonia and the country, 24/7.",
+    "news.search": "Search news…",
+    "news.empty": "No news found.",
+    "news.error": "We couldn't load the news right now. Please try again in a few minutes.",
+    "news.readMore": "Read more",
+    "cat.all": "All",
+    "cat.politics": "Politics",
+    "cat.sports": "Sports",
+    "cat.tourism": "Tourism",
+    "cat.culture": "Culture",
+    "cat.police": "Police",
+    "cat.regional": "Regional",
+    "cat.national": "National",
+    "cat.international": "International",
+    "prog.eyebrow": "Agenda",
+    "prog.title": "Schedule",
+    "prog.subtitle": "Our daily lineup, designed to keep you company from morning to night.",
+    "prog.days": "Monday to Friday",
+    "about.eyebrow": "About Us",
+    "about.title": "About Radio Cristal",
+    "about.body": "Radio Cristal is a media outlet committed to information, entertainment and daily companionship for the community. Our mission is to connect people through quality content, relevant news and a schedule designed to inform, entertain and build closeness with our listeners.",
+    "about.years": "years on air",
+    "about.v1.t": "Local voice",
+    "about.v1.d": "Up-close reporting by journalists from the region.",
+    "about.v2.t": "Community",
+    "about.v2.d": "We accompany Puerto Madryn 24 hours a day.",
+    "about.v3.t": "Credibility",
+    "about.v3.d": "More than 15 years reporting with rigor and respect.",
+    "about.v4.t": "Passion",
+    "about.v4.d": "Carefully crafted programming with the best music and interviews.",
+    "social.eyebrow": "Follow Us",
+    "social.title": "Connect with Radio Cristal",
+    "contact.eyebrow": "Contact",
+    "contact.title": "Get in touch",
+    "contact.subtitle": "Want to send us a tip, join the station, or book an ad? We're here for you.",
+    "contact.studios": "Studios",
+    "contact.email": "Email",
+    "contact.phone": "Phone",
+    "contact.name": "Name",
+    "contact.phoneOpt": "(optional)",
+    "contact.message": "Message",
+    "contact.send": "Send message",
+    "contact.success": "Message sent! We'll get back to you shortly.",
+    "contact.err.name": "Name too short",
+    "contact.err.email": "Invalid email",
+    "contact.err.message": "Tell us a bit more",
+    "footer.tag": "The voice that keeps Puerto Madryn company 24 hours a day. News, music and community.",
+    "footer.nav": "Navigation",
+    "footer.contact": "Contact",
+    "footer.join": "Join",
+    "footer.joinDesc": "Get the most important news in your inbox.",
+    "footer.rights": "All rights reserved.",
+    "footer.privacy": "Privacy policy",
+    "footer.terms": "Terms",
+    "footer.langLabel": "Language",
+    "player.live": "Live",
+    "player.play": "Play",
+    "player.pause": "Pause",
+    "player.volume": "Volume",
+    "player.connecting": "Connecting",
+    "player.connected": "Connected",
+    "player.idle": "Idle",
+    "player.nosignal": "No signal",
+    "lang.switch": "Language",
+  },
+  pt: {
+    "nav.home": "Início",
+    "nav.news": "Notícias",
+    "nav.programming": "Programação",
+    "nav.about": "Sobre",
+    "nav.contact": "Contato",
+    "cta.listenLive": "Ouvir ao vivo",
+    "cta.live": "Ao vivo",
+    "cta.pause": "Pausar transmissão",
+    "infobar.location": "Puerto Madryn, Chubut",
+    "infobar.loading": "Carregando clima…",
+    "infobar.feels": "Sensação",
+    "weather.clear": "Limpo",
+    "weather.partly": "Parcialmente nublado",
+    "weather.cloudy": "Nublado",
+    "weather.fog": "Neblina",
+    "weather.drizzle": "Garoa",
+    "weather.rain": "Chuva",
+    "weather.snow": "Neve",
+    "weather.storm": "Tempestade",
+    "hero.badge": "AO VIVO · FM 95.7 Puerto Madryn",
+    "hero.subtitle": "A voz que acompanha Puerto Madryn 24 horas por dia. Informação, música e comunidade.",
+    "hero.latestNews": "Últimas Notícias",
+    "hero.listeners": "Ouvintes",
+    "hero.programs": "Programas",
+    "hero.years": "Anos",
+    "hero.nowPlaying": "TOCANDO AGORA",
+    "hero.currentProgram": "Programa atual",
+    "hero.seeSchedule": "Ver programação completa",
+    "hero.withHost": "com",
+    "featured.readMore": "Leia mais",
+    "news.eyebrow": "Atualidade",
+    "news.title": "Últimas Notícias",
+    "news.subtitle": "O mais importante de Puerto Madryn, da Patagônia e do país, 24 horas.",
+    "news.search": "Buscar notícias…",
+    "news.empty": "Nenhuma notícia encontrada.",
+    "news.error": "Não foi possível carregar as notícias agora. Tente novamente em alguns minutos.",
+    "news.readMore": "Leia mais",
+    "cat.all": "Todas",
+    "cat.politics": "Política",
+    "cat.sports": "Esportes",
+    "cat.tourism": "Turismo",
+    "cat.culture": "Cultura",
+    "cat.police": "Policial",
+    "cat.regional": "Regionais",
+    "cat.national": "Nacionais",
+    "cat.international": "Internacionais",
+    "prog.eyebrow": "Agenda",
+    "prog.title": "Programação",
+    "prog.subtitle": "Nossa grade diária, pensada para te acompanhar de manhã até a noite.",
+    "prog.days": "Segunda a sexta",
+    "about.eyebrow": "Sobre Nós",
+    "about.title": "Sobre a Radio Cristal",
+    "about.body": "A Radio Cristal é um veículo de comunicação comprometido com a informação, o entretenimento e o acompanhamento diário da comunidade. Nossa missão é conectar pessoas por meio de conteúdos de qualidade, notícias relevantes e uma programação pensada para informar, entreter e gerar proximidade com nossos ouvintes.",
+    "about.years": "anos no ar",
+    "about.v1.t": "Voz local",
+    "about.v1.d": "Informação próxima, contada por jornalistas da região.",
+    "about.v2.t": "Comunidade",
+    "about.v2.d": "Acompanhamos Puerto Madryn 24 horas por dia.",
+    "about.v3.t": "Credibilidade",
+    "about.v3.d": "Mais de 15 anos informando com rigor e respeito.",
+    "about.v4.t": "Paixão",
+    "about.v4.d": "Programação cuidada com a melhor música e entrevistas.",
+    "social.eyebrow": "Siga-nos",
+    "social.title": "Conecte-se com a Radio Cristal",
+    "contact.eyebrow": "Contato",
+    "contact.title": "Fale conosco",
+    "contact.subtitle": "Quer enviar uma informação, fazer parte da rádio ou contratar um anúncio? Estamos aqui.",
+    "contact.studios": "Estúdios",
+    "contact.email": "E-mail",
+    "contact.phone": "Telefone",
+    "contact.name": "Nome",
+    "contact.phoneOpt": "(opcional)",
+    "contact.message": "Mensagem",
+    "contact.send": "Enviar mensagem",
+    "contact.success": "Mensagem enviada! Responderemos em breve.",
+    "contact.err.name": "Nome muito curto",
+    "contact.err.email": "E-mail inválido",
+    "contact.err.message": "Conte-nos um pouco mais",
+    "footer.tag": "A voz que acompanha Puerto Madryn 24 horas por dia. Informação, música e comunidade.",
+    "footer.nav": "Navegação",
+    "footer.contact": "Contato",
+    "footer.join": "Inscreva-se",
+    "footer.joinDesc": "Receba as notícias mais importantes no seu e-mail.",
+    "footer.rights": "Todos os direitos reservados.",
+    "footer.privacy": "Política de privacidade",
+    "footer.terms": "Termos",
+    "footer.langLabel": "Idioma",
+    "player.live": "Ao vivo",
+    "player.play": "Reproduzir",
+    "player.pause": "Pausar",
+    "player.volume": "Volume",
+    "player.connecting": "Conectando",
+    "player.connected": "Conectado",
+    "player.idle": "Em espera",
+    "player.nosignal": "Sem sinal",
+    "lang.switch": "Idioma",
+  },
+};
+
+const LOCALES: Record<Lang, string> = { es: "es-AR", en: "en-US", pt: "pt-BR" };
+
+type Ctx = {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: (k: string) => string;
+  locale: string;
+};
+
+const I18nCtx = createContext<Ctx | null>(null);
+
+export function I18nProvider({ children }: { children: ReactNode }) {
+  const [lang, setLangState] = useState<Lang>("es");
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("rc.lang") as Lang | null;
+      if (saved && DICTS[saved]) setLangState(saved);
+    } catch {
+      /* noop */
+    }
+  }, []);
+
+  const setLang = (l: Lang) => {
+    setLangState(l);
+    try {
+      localStorage.setItem("rc.lang", l);
+    } catch {
+      /* noop */
+    }
+    if (typeof document !== "undefined") document.documentElement.lang = l;
+  };
+
+  const t = (k: string) => DICTS[lang][k] ?? DICTS.es[k] ?? k;
+
+  return (
+    <I18nCtx.Provider value={{ lang, setLang, t, locale: LOCALES[lang] }}>{children}</I18nCtx.Provider>
+  );
+}
+
+export function useI18n() {
+  const v = useContext(I18nCtx);
+  if (!v) throw new Error("useI18n must be used inside I18nProvider");
+  return v;
+}
+
+export function describeWeatherKey(code: number): string {
+  if (code === 0) return "weather.clear";
+  if ([1, 2].includes(code)) return "weather.partly";
+  if (code === 3) return "weather.cloudy";
+  if ([45, 48].includes(code)) return "weather.fog";
+  if ([51, 53, 55, 56, 57].includes(code)) return "weather.drizzle";
+  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return "weather.rain";
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return "weather.snow";
+  if ([95, 96, 99].includes(code)) return "weather.storm";
+  return "weather.cloudy";
+}

@@ -1,0 +1,218 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-live: var(--live);
+  --color-surface: var(--surface);
+
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--brand) 40%, transparent), 0 20px 60px -20px color-mix(in oklab, var(--brand) 50%, transparent);
+  --shadow-elevated: 0 20px 60px -25px oklch(0.15 0.05 250 / 0.6);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Light mode (kept clean and editorial) */
+  --background: oklch(0.99 0.005 250);
+  --foreground: oklch(0.18 0.04 260);
+  --surface: oklch(0.97 0.008 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.04 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.04 260);
+  --primary: oklch(0.28 0.12 265);
+  --primary-foreground: oklch(0.99 0.005 250);
+  --secondary: oklch(0.95 0.012 250);
+  --secondary-foreground: oklch(0.22 0.06 265);
+  --muted: oklch(0.95 0.012 250);
+  --muted-foreground: oklch(0.48 0.03 260);
+  --accent: oklch(0.95 0.012 250);
+  --accent-foreground: oklch(0.22 0.06 265);
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.01 250);
+  --input: oklch(0.9 0.01 250);
+  --ring: oklch(0.55 0.2 260);
+
+  --brand: oklch(0.6 0.22 255);
+  --brand-foreground: oklch(0.99 0 0);
+  --live: oklch(0.62 0.24 25);
+}
+
+.dark {
+  --background: oklch(0.13 0.03 260);
+  --foreground: oklch(0.97 0.005 250);
+  --surface: oklch(0.17 0.04 262);
+  --card: oklch(0.17 0.04 262);
+  --card-foreground: oklch(0.97 0.005 250);
+  --popover: oklch(0.17 0.04 262);
+  --popover-foreground: oklch(0.97 0.005 250);
+  --primary: oklch(0.7 0.18 255);
+  --primary-foreground: oklch(0.13 0.03 260);
+  --secondary: oklch(0.22 0.04 262);
+  --secondary-foreground: oklch(0.97 0.005 250);
+  --muted: oklch(0.22 0.04 262);
+  --muted-foreground: oklch(0.7 0.02 260);
+  --accent: oklch(0.25 0.06 262);
+  --accent-foreground: oklch(0.97 0.005 250);
+  --destructive: oklch(0.65 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.7 0.18 255);
+
+  --brand: oklch(0.72 0.2 250);
+  --brand-foreground: oklch(0.13 0.03 260);
+  --live: oklch(0.68 0.24 22);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: 80rem;
+}
+
+@utility live-pulse {
+  position: relative;
+}
+@utility live-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-live);
+  box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-live) 70%, transparent);
+  animation: live-pulse 1.6s ease-out infinite;
+}
+
+@keyframes live-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-live) 70%, transparent); }
+  70% { box-shadow: 0 0 0 10px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+@keyframes eq-bar {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+.eq-bar { transform-origin: bottom; animation: eq-bar 0.9s ease-in-out infinite; }
+.eq-bar:nth-child(2) { animation-delay: 0.15s; }
+.eq-bar:nth-child(3) { animation-delay: 0.3s; }
+.eq-bar:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.6s ease-out both; }
+
+/* Estilos para el contenido HTML que viene del editor de WordPress
+   (título, párrafos, imágenes y links que el dueño de la radio escribe). */
+.wp-content {
+  color: oklch(0.93 0.005 250);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.wp-content > * + * {
+  margin-top: 1.25em;
+}
+.wp-content p {
+  color: oklch(0.88 0.005 250);
+}
+/* Forzar color claro aunque WordPress inyecte estilos inline oscuros */
+.wp-content * {
+  color: inherit !important;
+  background-color: transparent !important;
+}
+.wp-content h1,
+.wp-content h2,
+.wp-content h3,
+.wp-content h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 1.75em;
+}
+.wp-content h1 { font-size: 1.75rem; }
+.wp-content h2 { font-size: 1.5rem; }
+.wp-content h3 { font-size: 1.25rem; }
+.wp-content a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--color-brand) 40%, transparent);
+}
+.wp-content img,
+.wp-content figure {
+  border-radius: var(--radius-2xl);
+  width: 100%;
+  height: auto;
+}
+.wp-content figcaption {
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+  text-align: center;
+  margin-top: 0.5em;
+}
+.wp-content ul,
+.wp-content ol {
+  padding-left: 1.5em;
+}
+.wp-content ul { list-style: disc; }
+.wp-content ol { list-style: decimal; }
+.wp-content blockquote {
+  border-left: 3px solid var(--color-brand);
+  padding-left: 1em;
+  color: var(--color-muted-foreground);
+  font-style: italic;
+}
+.wp-content iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-2xl);
+}

@@ -1,0 +1,212 @@
+{
+  "mes": "Junio 2026",
+  "programas": {
+    "lunes_viernes": [
+      {
+        "time": "00:00 – 07:00",
+        "name": "Trasnoche Cristal",
+        "host": "Producción Radio Cristal",
+        "description": "Música y contenidos para acompañar la madrugada.",
+        "initials": "TC"
+      },
+      {
+        "time": "07:00 – 09:00",
+        "name": "Caminos Folklóricos",
+        "host": "Diego Cicocci",
+        "description": "Música folklórica para arrancar la mañana.",
+        "initials": "DC"
+      },
+      {
+        "time": "09:00 – 12:30",
+        "name": "AM Noticias",
+        "host": "Julián Tortola",
+        "description": "Informativo de interés general, cultura, formación y deportes con móviles exteriores.",
+        "initials": "JT"
+      },
+      {
+        "time": "12:30 – 13:00",
+        "name": "Panoramas de Noticias",
+        "host": "Orlando Truppa",
+        "description": "Resumen informativo de la mañana.",
+        "initials": "OT"
+      },
+      {
+        "time": "13:00 – 15:00",
+        "name": "Planeta 80",
+        "host": "Pablo Sturzenegger",
+        "description": "Los mejores hits de los años 80.",
+        "initials": "PS"
+      },
+      {
+        "time": "15:00 – 17:00",
+        "name": "Mega Ranking",
+        "host": "María Bustos",
+        "description": "El ranking musical más escuchado de la radio.",
+        "initials": "MB"
+      },
+      {
+        "time": "17:00 – 19:00",
+        "name": "Lo Que Faltaba – Magazine",
+        "host": "Marcos Méndez",
+        "description": "Magazine de tarde con actualidad, entrevistas y humor.",
+        "initials": "MM"
+      },
+      {
+        "time": "19:00 – 20:00",
+        "name": "Una y Mil Canciones",
+        "host": "Ana Córdoba",
+        "description": "Música variada para el atardecer.",
+        "initials": "AC"
+      },
+      {
+        "time": "20:00 – 21:00",
+        "name": "Panorama Cristal",
+        "host": "Orlando Truppa",
+        "description": "Informativo y periodístico del cierre del día.",
+        "initials": "OT"
+      },
+      {
+        "time": "21:00 – 24:00",
+        "name": "La Canción Lógica",
+        "host": "Mariano Lainez",
+        "description": "Música y entretenimiento para cerrar la noche.",
+        "initials": "ML"
+      }
+    ],
+    "lunes_miercoles_viernes": [
+      {
+        "time": "21:00 – 24:00",
+        "name": "Las Estrelladas",
+        "host": "Vicky González",
+        "description": "En vivo y por streaming en YouTube. Solo lunes, miércoles y viernes.",
+        "initials": "VG"
+      }
+    ],
+    "jueves": [
+      {
+        "time": "19:00 – 20:00",
+        "name": "Mentes Lúcidas",
+        "host": "Prof. Flavia Núñez",
+        "description": "Taller de radio del Servicio de Protección de los Derechos del Niño, Niña y Adolescentes, dependiente de la Subsecretaría de Familia de la Municipalidad de Puerto Madryn. En Radio Cristal desde el año 2007.",
+        "initials": "FN"
+      }
+    ],
+    "sabado": [
+      {
+        "time": "00:05 – 03:00",
+        "name": "Internacionales 107",
+        "host": "Producción Radio Cristal",
+        "description": "Música internacional para la madrugada del sábado.",
+        "initials": "IC"
+      },
+      {
+        "time": "03:00 – 07:00",
+        "name": "Trasnoche Cristal",
+        "host": "Producción Radio Cristal",
+        "description": "Música del recuerdo para la madrugada.",
+        "initials": "TC"
+      },
+      {
+        "time": "07:00 – 09:00",
+        "name": "Acordes y Rasguidos",
+        "host": "Producción Radio Cristal",
+        "description": "Folklore para el sábado a la mañana.",
+        "initials": "AR"
+      },
+      {
+        "time": "09:00 – 12:00",
+        "name": "Protagonistas",
+        "host": "Julio César Serón",
+        "description": "Periodístico político y social. En vivo.",
+        "initials": "JS"
+      },
+      {
+        "time": "12:00 – 13:00",
+        "name": "Panorama Resumen Semanal",
+        "host": "Orlando Trupa",
+        "description": "Resumen semanal de noticias.",
+        "initials": "OT"
+      },
+      {
+        "time": "13:00 – 16:00",
+        "name": "La Canción Lógica",
+        "host": "Mariano Lainez",
+        "description": "Música y entretenimiento de tarde.",
+        "initials": "ML"
+      },
+      {
+        "time": "16:00 – 19:00",
+        "name": "Planeta 80",
+        "host": "Pablo Sturzenegger",
+        "description": "Producción y conducción. Los mejores éxitos de los 80.",
+        "initials": "PS"
+      },
+      {
+        "time": "19:00 – 21:00",
+        "name": "Musiquera",
+        "host": "Producción Radio Cristal",
+        "description": "Música variada y bailable para el sábado a la noche.",
+        "initials": "MU"
+      },
+      {
+        "time": "21:00 – 24:00",
+        "name": "Hagamos Previa",
+        "host": "Marco Méndez",
+        "description": "El cierre del sábado con la mejor música.",
+        "initials": "HP"
+      }
+    ],
+    "domingo": [
+      {
+        "time": "00:01 – 03:00",
+        "name": "Parriba Musical Tropical",
+        "host": "Rogelio Suárez",
+        "description": "Música tropical para la madrugada del domingo.",
+        "initials": "RS"
+      },
+      {
+        "time": "03:00 – 07:00",
+        "name": "Amanecer de Cristal",
+        "host": "Producción Radio Cristal",
+        "description": "Musical para acompañar el amanecer del domingo.",
+        "initials": "AC"
+      },
+      {
+        "time": "07:00 – 09:00",
+        "name": "Acordes y Rasguidos",
+        "host": "Producción Radio Cristal",
+        "description": "Folklore para el domingo a la mañana.",
+        "initials": "AR"
+      },
+      {
+        "time": "09:00 – 13:00",
+        "name": "Anti-Age",
+        "host": "Marcela Cabrera",
+        "description": "Música del recuerdo para disfrutar el domingo.",
+        "initials": "MC"
+      },
+      {
+        "time": "13:00 – 15:00",
+        "name": "Tarde de Nacionales",
+        "host": "Producción Radio Cristal",
+        "description": "Música nacional para el domingo a la tarde.",
+        "initials": "TN"
+      },
+      {
+        "time": "15:00 – 18:00",
+        "name": "Una y Mil Canciones",
+        "host": "Ana Córdoba",
+        "description": "Música variada para la tarde del domingo.",
+        "initials": "AC"
+      },
+      {
+        "time": "18:00 – 24:00",
+        "name": "Adiós Finde",
+        "host": "Producción Radio Cristal",
+        "description": "Música variada para despedir el fin de semana.",
+        "initials": "AF"
+      }
+    ]
+  },
+  "nota": "Flashes informativos de Radio Noticias del Plata cada media hora. Los programas pueden variar por transmisiones de fútbol nacionales o internacionales."
+}
